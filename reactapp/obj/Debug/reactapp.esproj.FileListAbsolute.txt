@@ -1,0 +1,2 @@
+C:\Users\Elif Tuncer\source\repos\QuizApp\reactapp\obj\Debug\reactapp.esproj.SuggestedBindingRedirects.cache
+C:\Users\Elif Tuncer\source\repos\QuizApp\reactapp\obj\Debug\reactapp.esproj.CoreCompileInputs.cache
