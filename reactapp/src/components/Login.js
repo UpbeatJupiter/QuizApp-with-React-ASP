@@ -1,21 +1,38 @@
-//{
-//  // This file allows you to configure ESLint according to your project's needs, so that you
-//  // can control the strictness of the linter, the plugins to use, and more.
-
-//  // For more information about configuring ESLint, visit https://eslint.org/docs/user-guide/configuring/
-
-//  "root": true,
-//  "extends": "eslint:recommended",
-//  "rules": {}
-//}
-
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Center from './Center'
+import useForm from '../hooks/useForm'
 
+const getFreshModel = () => ({
+    name: '',
+    email: ''
+})
 
 export default function Login() {
+
+    const {
+        values,
+        setValues,
+        errors,
+        setErrors,
+        handleInputChange
+    } = useForm(getFreshModel);
+
+    const login = e => {
+        e.preventDefault();
+        if (validate())
+        console.log(values);
+    }
+
+    const validate = () => {
+        let temp = {}
+        temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Email is not valid."
+        temp.name = values.name != "" ? "" : "This field is required."
+        setErrors(temp)
+        return Object.values(temp).every(x => x == "")
+    }
+
     return (
         <Center>
             <Card sx={{ width: 400 }}>
@@ -29,15 +46,22 @@ export default function Login() {
                             width: '90%'
                         }
                     }}>
-                        <form noValidate autoComplete="off">
+                        <form noValidate autoComplete="off" onSubmit={login}>
                             <TextField
                                 label="Email"
                                 name="email"
-                                variant="outlined" />
+                                value={values.email}
+                                onChange={handleInputChange}
+                                variant="outlined"
+                                {...(errors.email && { error: true, helperText: errors.email })}
+                            />
                             <TextField
                                 label="Name"
                                 name="name"
-                                variant="outlined" />
+                                value={values.name}
+                                onChange={handleInputChange}
+                                variant="outlined" 
+                                {...(errors.name && { error: true, helperText: errors.name })} />
                             <Button
                                 type="submit"
                                 variant="contained"
