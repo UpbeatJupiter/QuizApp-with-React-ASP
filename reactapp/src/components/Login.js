@@ -22,7 +22,13 @@ export default function Login() {
     const login = e => {
         e.preventDefault();
         if (validate())
-        console.log(values);
+            createAPIEndpoint(ENDPOINTS.participant)
+                .post(values)
+                .then(res => {
+                    setContext({ participantId: res.data.participantId })
+                    navigate('/quiz')
+                })
+                .catch(err => console.log(err))
     }
 
     const validate = () => {
