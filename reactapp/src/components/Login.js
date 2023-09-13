@@ -11,6 +11,9 @@ const getFreshModel = () => ({
 
 export default function Login() {
 
+    const { context, setContext, resetContext } = useStateContext();
+    const navigate = useNavigate()
+
     const {
         values,
         setValues,
