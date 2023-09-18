@@ -3,6 +3,9 @@ import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Center from './Center'
 import useForm from '../hooks/useForm'
+import { createAPIEndpoint, ENDPOINTS } from '../api'
+import useStateContext from '../hooks/useStateContext'
+import { useNavigate } from 'react-router'
 
 const getFreshModel = () => ({
     name: '',
@@ -21,6 +24,11 @@ export default function Login() {
         setErrors,
         handleInputChange
     } = useForm(getFreshModel);
+
+    useEffect(() => {
+        resetContext()
+    }, [])
+
 
     const login = e => {
         e.preventDefault();
@@ -47,10 +55,10 @@ export default function Login() {
             <Card sx={{ width: 400 }}>
                 <CardContent sx={{ textAlign: 'center' }}>
                     <Typography variant="h3" sx={{ my: 3 }}>
-                    Quiz App</Typography>
+                        Quiz App
+                    </Typography>
                     <Box sx={{
-                        '&  .MuiTextField-root':
-                        {
+                        '& .MuiTextField-root': {
                             m: 1,
                             width: '90%'
                         }
@@ -62,14 +70,13 @@ export default function Login() {
                                 value={values.email}
                                 onChange={handleInputChange}
                                 variant="outlined"
-                                {...(errors.email && { error: true, helperText: errors.email })}
-                            />
+                                {...(errors.email && { error: true, helperText: errors.email })} />
                             <TextField
                                 label="Name"
                                 name="name"
                                 value={values.name}
                                 onChange={handleInputChange}
-                                variant="outlined" 
+                                variant="outlined"
                                 {...(errors.name && { error: true, helperText: errors.name })} />
                             <Button
                                 type="submit"
@@ -81,7 +88,7 @@ export default function Login() {
                 </CardContent>
             </Card>
         </Center>
-       
-        
+
+
     )
 }
