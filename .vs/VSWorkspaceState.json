@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\reactapp",
+    "\\reactapp\\src",
+    "\\reactapp\\src\\components",
+    "\\webapi",
+    "\\webapi\\Controllers",
+    "\\webapi\\Models"
+  ],
+  "SelectedNode": "\\webapi\\webapi.csproj",
+  "PreviewInSolutionExplorer": false
+}

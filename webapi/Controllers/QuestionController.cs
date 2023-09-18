@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuizAPI.Models;
+using webapi.Models;
 
 namespace QuizAPI.Controllers
 {
@@ -14,9 +14,9 @@ namespace QuizAPI.Controllers
 	[ApiController]
 	public class QuestionController : ControllerBase
 	{
-		private readonly QuizDbContext _context;
+		private readonly QuizDBContext _context;
 
-		public QuestionController(QuizDbContext context)
+		public QuestionController(QuizDBContext context)
 		{
 			_context = context;
 		}
