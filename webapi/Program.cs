@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using webapi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<QuizDBContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("Devconnection")));
+builder.Services.AddDbContext<QuizDBContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 
 var app = builder.Build();
 
@@ -20,14 +21,19 @@ options.WithOrigins("http://localhost:3000")
 .AllowAnyMethod()
 .AllowAnyHeader());
 
+app.UseStaticFiles(new StaticFileOptions
+{
+	FileProvider = new PhysicalFileProvider(
+		Path.Combine(builder.Environment.ContentRootPath, "Images")),
+	RequestPath = "/Images"
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
